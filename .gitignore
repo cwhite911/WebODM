@@ -74,9 +74,9 @@ target/
 .python-version
 
 # celery beat schedule file
-celerybeat-schedule
+celerybeat-schedule.db
 celerybeat.pid
-
+core
 # dotenv
 .env
 
@@ -100,3 +100,5 @@ package-lock.json
 
 # Plugin Repo
 plugins/rapid-dsm
+src/
+.DS_Store
