@@ -97,3 +97,6 @@ pip-selfcheck.json
 package-lock.json
 .cronenv
 .initialized
+
+# Plugin Repo
+plugins/rapid-dsm

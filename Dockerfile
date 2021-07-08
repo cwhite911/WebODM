@@ -21,7 +21,7 @@ RUN printf "deb     http://ftp.us.debian.org/debian/    stable main contrib non-
 RUN printf "deb     http://ftp.us.debian.org/debian/    testing main contrib non-free\ndeb-src http://ftp.us.debian.org/debian/    testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
 
 # Install Python3, GDAL, nginx, letsencrypt, psql
-RUN apt-get -qq update && apt-get -qq install -t testing -y --no-install-recommends python3 python3-pip git g++ python3-dev libpq-dev binutils libproj-dev gdal-bin python3-gdal nginx certbot grass-core && apt-get -qq install -y --no-install-recommends gettext-base cron postgresql-client-9.6
+RUN apt-get -qq update && apt-get -qq install -t testing -y --no-install-recommends python3 python3-pip git g++ python3-dev libpq-dev binutils libproj-dev gdal-bin python3-gdal nginx certbot grass-core grass-dev build-essential && apt-get -qq install -y --no-install-recommends gettext-base cron postgresql-client-9.6
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1 && update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
 
 # Install pip reqs
@@ -44,7 +44,7 @@ RUN python manage.py collectstatic --noinput
 RUN bash app/scripts/plugin_cleanup.sh && echo "from app.plugins import build_plugins;build_plugins()" | python manage.py shell
 
 # Cleanup
-RUN apt-get remove -y g++ python3-dev libpq-dev && apt-get autoremove -y
+RUN apt-get remove -y python3-dev libpq-dev && apt-get autoremove -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 RUN rm /webodm/webodm/secret_key.py
